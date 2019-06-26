@@ -3,7 +3,7 @@ var app = express();
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin",
-        "http://localhost:4200");
+        "https://wb-su19-dwelch-client-ang.herokuapp.com");
     res.header("Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods",
@@ -16,4 +16,4 @@ app.get('/hello', function(req, res){
   res.send('hello world');
 });
 
-app.listen(3003);
+app.listen(process.env.PORT || 3003);

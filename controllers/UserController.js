@@ -1,21 +1,21 @@
 const userService = require('../services/UserService');
 
 module.exports = app => {
-    register = (req, res) => {
+    createUser = (req, res) => {
         userService.createUser(req.body)
             .then(users => {
                 res.send(users);
             })
     }
 
-    profile = (req, res) => {
-        userService.findUserById(req.body['userId'])
+    findUserById = (req, res) => {
+        userService.findUserById(req.params['userId'])
             .then(user => {
                 res.send(user);
             });
     }
 
-    login = (req, res) => {
+    findUserByCredentials = (req, res) => {
         userService.findUserByCredentials(req.body['username'], req.body['password'])
             .then(user => {
                 res.send(user);
@@ -41,19 +41,18 @@ module.exports = app => {
             .then(status => res.send(status));
     }
 
-    updateProfile = (req, res) => {
-        userService.updateUser(req.body['userId'], req.body)
+    updateUser = (req, res) => {
+        userService.updateUser(req.params['userId'], req.body)
             .then(status => {
                 res.send(status);
             });
     }
 
     app.get('/api/users', findAllUsers);
-    app.get('/api/profile', profile);
-    app.post('/api/login', login);
-    app.post('/api/logout', logout);
+    app.get('/api/users/:userId', findUserById);
+    app.post('/api/users/login', findUserByCredentials);
     app.post('/api/users/register', findUserByUsername);
-    app.post('/api/register', register);
+    app.post('/api/users', createUser);
     app.delete('/api/users/:userId', deleteUser);
-    app.put('/api/profile', updateProfile);
+    app.put('/api/users/:userId', updateUser);
 }

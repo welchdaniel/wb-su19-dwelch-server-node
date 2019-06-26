@@ -17,7 +17,7 @@ deletePage = (websiteId, pageId) => {
 }
 
 updatePage = (websiteId, pageId, page) => {
-    //return pageModel.updateOne({_id: id}, {$set: user});
+    //return pageModel.updateOne({_id: id}, {$set: page});
 }
 
 module.exports = {
